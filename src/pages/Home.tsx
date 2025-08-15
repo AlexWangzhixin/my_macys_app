@@ -60,7 +60,7 @@ export default function Home() {
       icon: "fa-solid fa-utensils",
       color: "bg-orange-100 text-orange-600",
       imageUrl: "https://space.coze.cn/api/coze_space/gen_image?image_size=square&prompt=Romantic%20dinner%20plate%2C%20heart-shaped%20food%2C%20warm%20colors%2C%20cozy%20lighting%2C%20illustration%20style&sign=b4587a7d1f0a403496f04b11ff9c3807",
-      details: "本小姐今天想吃点好的，不要太咸也不要太淡，记得多放葱花香菜！对了，摆盘要好看一点，不然本小姐可不吃哦~",
+      details: "本小姐今天想吃点好的，不要太咸也不要太淡，记得不放葱花香菜！对了，摆盘要好看一点，不然本小姐可不吃哦~",
       options: ["家常菜", "甜点", "水果拼盘"]
     },
     {
@@ -253,7 +253,7 @@ export default function Home() {
                   </div>
                 ) : (
                   <div className="flex items-center justify-center">
-                    <span>立即为女友服务</span>
+                    <span>立即为我服务</span>
                     <i className="fa-solid fa-heart ml-2"></i>
                   </div>
                 )}
