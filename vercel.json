@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "framework": "vite",
+  "outputDirectory": "dist/static",
+  "rewrites": [
+    {
+      "source": "/:path*",
+      "destination": "/index.html"
+    }
+  ]
+}
