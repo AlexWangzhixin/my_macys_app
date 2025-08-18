@@ -143,11 +143,11 @@ export default function Home() {
             <button onClick={() => navigate('/login')} className="px-4 py-2 rounded-xl bg-pink-500 text-white hover:bg-pink-600">登录</button>
           ) : (
             <>
-              <span className="text-sm text-gray-500">当前身份：{user}</span>
+              <span className="text-sm text-gray-500">当前身份：Macy</span>
               {user === 'alex' ? (
                 <Link to="/alex" className="px-4 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700">进入接单中心</Link>
               ) : (
-                <Link to="/alex" className="px-4 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700">去找Alex接单</Link>
+                <Link to="/alex" className="px-4 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700">去看Alex的订单</Link>
               )}
               <button onClick={logout} className="px-4 py-2 rounded-xl bg-gray-800 text-white hover:bg-black">退出</button>
             </>
