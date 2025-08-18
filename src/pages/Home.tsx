@@ -82,7 +82,7 @@ export default function Home() {
       id: 4,
       title: "陪伴看电视",
       description: "一个人看剧好无聊...",
-      price: "陪我看完一整集",
+      price: "一个靠靠",
       icon: "fa-solid fa-tv",
       color: "bg-purple-100 text-purple-600",
       imageUrl: "https://space.coze.cn/api/coze_space/gen_image?image_size=square&prompt=Couple%20watching%20TV%20together%2C%20cozy%20sofa%2C%20snacks%20and%20drinks%2C%20warm%20lighting%2C%20illustration%20style&sign=8a3e6d4fba498664bdbda53e73930714",
@@ -136,7 +136,7 @@ export default function Home() {
         Macy的服务中心
         </h1>
         <p className="text-gray-600 text-sm sm:text-base max-w-md mx-auto">
-          {user === 'alex' ? '欢迎来给Macy接单噢，完成任务有奖励~' : '哼，还不快来看看本小姐今天需要什么服务~ 选得合我心意的话，有奖励哦！'}
+          {user === 'alex' ? '欢迎来给Macy接单噢，完成任务有奖励~' : '哼，我来看看本小姐今天需要什么服务~ 服务得令我满意的话，给奖励哦！'}
         </p>
         <div className="mt-4 flex items-center justify-center gap-3">
           {!isAuthenticated ? (
