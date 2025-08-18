@@ -1,46 +1,59 @@
-const CACHE_NAME = 'aowai-girl-v1';
+const CACHE_NAME = 'mymacysapp-v2';
+// 仅缓存静态资源，避免缓存 index.html 导致标题更新不生效
 const urlsToCache = [
   '/',
-  '/index.html',
   '/src/assets/fontawesome/css/all.min.css',
   '/src/assets/placeholder.png'
 ];
 
 self.addEventListener('install', (event) => {
+  self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => cache.addAll(urlsToCache))
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache))
   );
 });
 
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames
+          .filter((name) => name !== CACHE_NAME)
+          .map((name) => caches.delete(name))
+      );
+    }).then(() => self.clients.claim())
+  );
+});
+
+// 对 HTML 采用 network-first，确保 index.html 总是优先从网络获取最新版本
 self.addEventListener('fetch', (event) => {
+  const request = event.request;
+  const acceptHeader = request.headers.get('accept') || '';
+
+  if (request.mode === 'navigate' || acceptHeader.includes('text/html')) {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          // 在线成功则更新缓存并返回
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
+          return response;
+        })
+        .catch(() => caches.match(request).then((cached) => cached || caches.match('/')))
+    );
+    return;
+  }
+
+  // 其他静态资源采用 cache-first
   event.respondWith(
-    caches.match(event.request)
-      .then((response) => {
-        // 如果在缓存中找到响应，则返回缓存的响应
-        if (response) {
-          return response;
-        }
-        
-        // 克隆请求，因为请求是一个流，只能被消费一次
-        const fetchRequest = event.request.clone();
-        
-        return fetch(fetchRequest).then((response) => {
-          // 检查响应是否有效
-          if (!response || response.status !== 200 || response.type !== 'basic') {
-            return response;
-          }
-          
-          // 克隆响应，因为响应是一个流，只能被消费一次
-          const responseToCache = response.clone();
-          
-          caches.open(CACHE_NAME)
-            .then((cache) => {
-              cache.put(event.request, responseToCache);
-            });
-          
-          return response;
-        });
-      })
+    caches.match(request).then((cached) => {
+      if (cached) return cached;
+      return fetch(request).then((response) => {
+        if (!response || response.status !== 200 || response.type === 'opaque') return response;
+        const copy = response.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
+        return response;
+      });
+    })
   );
 });
