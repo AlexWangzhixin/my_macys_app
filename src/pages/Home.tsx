@@ -1,6 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { motion } from 'framer-motion';
 import { toast } from 'sonner';
+import { AuthContext } from '@/contexts/authContext';
+import { Link, useNavigate } from 'react-router-dom';
 
 // 服务接口定义
 interface Service {
@@ -16,6 +18,8 @@ interface Service {
 }
 
 export default function Home() {
+  const { addOrder, isAuthenticated, user, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
   // 状态管理
   const [selectedService, setSelectedService] = useState<Service | null>(null);
   const [selectedOption, setSelectedOption] = useState<string>("");
@@ -107,6 +111,8 @@ export default function Home() {
       toast.success(`已成功提交「${selectedService.title}」订单！`, {
         description: `要求: ${selectedOption || '无特殊要求'} | 报酬: ${selectedService.price}`,
       });
+      // 写入共享订单，Alex中心可见
+      addOrder(selectedService.title, selectedOption);
     }, 1500);
   };
   
@@ -118,8 +124,23 @@ export default function Home() {
         Macy的服务中心
         </h1>
         <p className="text-gray-600 text-sm sm:text-base max-w-md mx-auto">
-          哼，还不快来看看本小姐今天需要什么服务~ 选得合我心意的话，有奖励哦！
+          {user === 'alex' ? '欢迎来给Macy接单噢，完成任务有奖励~' : '哼，还不快来看看本小姐今天需要什么服务~ 选得合我心意的话，有奖励哦！'}
         </p>
+        <div className="mt-4 flex items-center justify-center gap-3">
+          {!isAuthenticated ? (
+            <button onClick={() => navigate('/login')} className="px-4 py-2 rounded-xl bg-pink-500 text-white hover:bg-pink-600">登录</button>
+          ) : (
+            <>
+              <span className="text-sm text-gray-500">当前身份：{user}</span>
+              {user === 'alex' ? (
+                <Link to="/alex" className="px-4 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700">进入接单中心</Link>
+              ) : (
+                <Link to="/alex" className="px-4 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700">去找Alex接单</Link>
+              )}
+              <button onClick={logout} className="px-4 py-2 rounded-xl bg-gray-800 text-white hover:bg-black">退出</button>
+            </>
+          )}
+        </div>
       </header>
       
       {/* 服务卡片网格 */}
