@@ -5,11 +5,13 @@ import { Toaster } from 'sonner';
 import App from "./App.tsx";
 import "./index.css";
 
-// 注册service worker
+// 注册service worker（带版本参数，强制抓取最新脚本并更新）
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js')
+    navigator.serviceWorker
+      .register('/service-worker.js?v=2')
       .then((registration) => {
+        try { registration.update(); } catch {}
         console.log('SW registered: ', registration);
       })
       .catch((registrationError) => {
