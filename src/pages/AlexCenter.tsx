@@ -48,7 +48,7 @@ export default function AlexCenter() {
 
         <div className="space-y-3">
           {orders.length === 0 && (
-            <div className="p-6 bg-white rounded-xl text-center text-gray-500 border">暂无订单，去 <Link to="/" className="text-blue-600 hover:underline">Macy的服务中心</Link> 提交一个吧。</div>
+            <div className="p-6 bg-white rounded-xl text-center text-gray-500 border">暂无订单，问问Macy有没有最新的需求吧</div>
           )}
 
           {orders.map((o) => (
