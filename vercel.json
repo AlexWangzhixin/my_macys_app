@@ -8,12 +8,5 @@
       "source": "/:path*",
       "destination": "/index.html"
     }
-  ],
-  "redirects": [
-    {
-      "source": "/:path*",
-      "destination": "/index.html",
-      "permanent": true
-    }
   ]
 }
