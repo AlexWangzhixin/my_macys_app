@@ -147,7 +147,7 @@ export default function Home() {
               {user === 'alex' ? (
                 <Link to="/alex" className="px-4 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700">进入接单中心</Link>
               ) : (
-                <Link to="/alex" className="px-4 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700">去看Alex的订单</Link>
+                <Link to="/alex" className="px-4 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700">Alex的订单</Link>
               )}
               <button onClick={logout} className="px-4 py-2 rounded-xl bg-gray-800 text-white hover:bg-black">退出</button>
             </>
