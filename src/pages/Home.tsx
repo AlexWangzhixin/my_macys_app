@@ -90,6 +90,18 @@ export default function Home() {
       options: ["偶像剧", "综艺节目", "电影"]
     },
   ];
+
+  // 更多项目（支持拓展）
+  const futureProjects: { id: number; title: string; description: string; icon: string; color: string; status?: string }[] = [
+    {
+      id: 101,
+      title: "更多项目，敬请期待",
+      description: "后续将上线更多贴心服务~",
+      icon: "fa-solid fa-rocket",
+      color: "border-pink-300 text-pink-500",
+      status: "coming-soon",
+    },
+  ];
   
   // 处理服务选择
   const handleServiceSelect = (service: Service) => {
@@ -194,6 +206,28 @@ export default function Home() {
               </div>
             </motion.div>
           ))}
+        </div>
+
+        {/* 更多项目（支持拓展） */}
+        <div className="mt-8">
+          <h2 className="text-lg font-semibold text-gray-800 mb-3">更多项目</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+            {futureProjects.map((p) => (
+              <div
+                key={p.id}
+                className={`group relative bg-white rounded-2xl transition-all border-2 border-dashed ${p.color} p-5 flex items-start gap-3 hover:shadow-md cursor-pointer`}
+                onClick={() => toast("敬请期待~")}
+              >
+                <div className="w-12 h-12 rounded-full bg-pink-50 flex items-center justify-center">
+                  <i className={`${p.icon} text-xl`}></i>
+                </div>
+                <div>
+                  <div className="font-semibold text-gray-800">{p.title}</div>
+                  <div className="text-sm text-gray-500 mt-1">{p.description}</div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </main>
       

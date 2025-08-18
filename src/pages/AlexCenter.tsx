@@ -3,7 +3,7 @@ import { AuthContext } from '@/contexts/authContext';
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function AlexCenter() {
-  const { orders, acceptOrder, completeOrder, isAuthenticated, user, logout } = useContext(AuthContext);
+  const { orders, acceptOrder, completeOrder, isAuthenticated, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const counters = useMemo(() => {
@@ -27,9 +27,7 @@ export default function AlexCenter() {
         <p className="text-gray-600 text-sm sm:text-base max-w-md mx-auto">
           作为Macy的男朋友，随时准备响应她的需求。这里显示所有待办与进行中的小任务。
         </p>
-        <div className="mt-3 text-sm text-gray-500">
-          <Link to="/" className="text-blue-600 hover:underline">返回 Macy 的服务中心</Link>
-        </div>
+        {/* 取消返回 Macy 的服务中心入口 */}
       </header>
 
       <main className="container mx-auto px-4 pb-16">

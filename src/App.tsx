@@ -56,7 +56,7 @@ export default function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<ProtectedRoute requireUser='macy'><Home /></ProtectedRoute>} />
-        <Route path="/alex" element={<ProtectedRoute requireUser='alex'><AlexCenter /></ProtectedRoute>} />
+        <Route path="/alex" element={<ProtectedRoute><AlexCenter /></ProtectedRoute>} />
         <Route path="/other" element={<div className="text-center text-xl">Other Page - Coming Soon</div>} />
         <Route path="/test" element={<TestPage />} />
         <Route path="*" element={<Navigate to="/login" replace />} />
