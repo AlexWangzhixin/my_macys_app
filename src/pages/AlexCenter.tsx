@@ -13,7 +13,7 @@ export default function AlexCenter() {
     return { pending, accepted, completed };
   }, [orders]);
 
-  if (!isAuthenticated || user !== 'alex') {
+  if (!isAuthenticated) {
     navigate('/login');
     return null;
   }

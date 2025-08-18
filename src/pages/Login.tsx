@@ -23,8 +23,8 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white flex items-center justify-center">
-      <div className="p-8 bg-white rounded-2xl shadow-lg w-full max-w-md">
+    <div className="min-h-[100dvh] sm:min-h-screen bg-gradient-to-b from-pink-50 to-white flex items-center justify-center px-4">
+      <div className="p-8 bg-white/90 backdrop-blur rounded-2xl shadow-lg w-full max-w-md">
         <h1 className="text-2xl font-bold text-center mb-6 bg-gradient-to-r from-pink-500 to-red-400 bg-clip-text text-transparent">
           选择登录身份
         </h1>

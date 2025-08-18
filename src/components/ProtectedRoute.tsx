@@ -4,13 +4,13 @@ import { AuthContext } from '@/contexts/authContext';
 
 interface ProtectedRouteProps {
   children: JSX.Element;
+  // 保留但不强制使用角色限制，满足“登录后在两个中心自由切换”的需求
   requireUser?: 'alex' | 'macy';
 }
 
-export default function ProtectedRoute({ children, requireUser }: ProtectedRouteProps) {
-  const { isAuthenticated, user } = useContext(AuthContext);
+export default function ProtectedRoute({ children }: ProtectedRouteProps) {
+  const { isAuthenticated } = useContext(AuthContext);
   if (!isAuthenticated) return <Navigate to="/login" replace />;
-  if (requireUser && user !== requireUser) return <Navigate to="/login" replace />;
   return children;
 }
 
