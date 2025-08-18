@@ -256,9 +256,10 @@ export default function Home() {
               />
               <button 
                 onClick={() => setIsModalOpen(false)}
-                className="absolute top-4 left-4 bg-white rounded-full p-2 shadow-md text-gray-700 hover:text-pink-500 transition-colors"
+                className="absolute top-4 left-4 w-10 h-10 rounded-full bg-white border-2 border-pink-200 flex items-center justify-center shadow-md text-pink-500 hover:text-pink-600 hover:border-pink-300 transition"
+                aria-label="关闭"
               >
-                <i className="fa-solid fa-times"></i>
+                <i className="fa-solid fa-xmark text-xl"></i>
               </button>
             </div>
             

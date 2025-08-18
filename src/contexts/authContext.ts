@@ -20,6 +20,9 @@ export interface AuthContextValue {
   addOrder: (title: string, option: string) => void;
   acceptOrder: (orderId: string) => void;
   completeOrder: (orderId: string) => void;
+  rewardRequest: { count: number; at: number } | null;
+  requestReward: () => void;
+  clearRewardRequest: () => void;
 }
 
 export const AuthContext = createContext<AuthContextValue>({
@@ -32,4 +35,7 @@ export const AuthContext = createContext<AuthContextValue>({
   addOrder: () => {},
   acceptOrder: () => {},
   completeOrder: () => {},
+  rewardRequest: null,
+  requestReward: () => {},
+  clearRewardRequest: () => {},
 });

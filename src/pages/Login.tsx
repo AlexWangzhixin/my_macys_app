@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '@/contexts/authContext';
+import { toast } from 'sonner';
 
 export default function Login() {
-  const { setIsAuthenticated, setUser } = useContext(AuthContext);
+  const { setIsAuthenticated, setUser, rewardRequest, clearRewardRequest } = useContext(AuthContext);
   const [selectedUser, setSelectedUser] = useState<'alex' | 'macy'>('macy');
   const navigate = useNavigate();
 
@@ -19,6 +20,12 @@ export default function Login() {
   const handleLogin = () => {
     setUser(selectedUser);
     setIsAuthenticated(true);
+    if (selectedUser === 'macy' && rewardRequest && rewardRequest.count > 0) {
+      toast.success(`Alex 申请领取奖励`, {
+        description: `已完成 ${rewardRequest.count} 单，等待本小姐发放奖励~`
+      });
+      clearRewardRequest();
+    }
     navigate(selectedUser === 'alex' ? '/alex' : '/');
   };
 

@@ -11,6 +11,7 @@ export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState<AppUser>(null);
   const [orders, setOrders] = useState<OrderItem[]>([]);
+  const [rewardRequest, setRewardRequest] = useState<{ count: number; at: number } | null>(null);
 
   const addOrder = (title: string, option: string) => {
     const newOrder: OrderItem = {
@@ -31,6 +32,13 @@ export default function App() {
     setOrders((prev) => prev.map((o) => (o.id === orderId ? { ...o, status: 'completed' } : o)));
   };
 
+  const requestReward = () => {
+    const completedCount = orders.filter(o => o.status === 'completed').length;
+    setRewardRequest({ count: completedCount, at: Date.now() });
+  };
+
+  const clearRewardRequest = () => setRewardRequest(null);
+
   const logout = () => {
     setIsAuthenticated(false);
     setUser(null);
@@ -47,8 +55,11 @@ export default function App() {
       addOrder,
       acceptOrder,
       completeOrder,
+      rewardRequest,
+      requestReward,
+      clearRewardRequest,
     }),
-    [isAuthenticated, user, orders]
+    [isAuthenticated, user, orders, rewardRequest]
   );
 
   return (
