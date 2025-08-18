@@ -12,6 +12,15 @@
   "redirects": [
     {
       "source": "/(.*)",
+      "destination": "https://mymacys-qx2g3iex6-alexs-projects-5c793e1a.vercel.app/$1",
+      "permanent": true
+    }
+  ]
+}
+  ],
+  "redirects": [
+    {
+      "source": "/(.*)",
       "destination": "https://mymacys-f9v1s5qb1-alexs-projects-5c793e1a.vercel.app/$1",
       "permanent": true
     }
