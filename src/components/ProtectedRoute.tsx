@@ -8,9 +8,13 @@ interface ProtectedRouteProps {
   requireUser?: 'alex' | 'macy';
 }
 
-export default function ProtectedRoute({ children }: ProtectedRouteProps) {
-  const { isAuthenticated } = useContext(AuthContext);
+export default function ProtectedRoute({ children, requireUser }: ProtectedRouteProps) {
+  const { isAuthenticated, user } = useContext(AuthContext);
   if (!isAuthenticated) return <Navigate to="/login" replace />;
+  if (requireUser && user !== requireUser) {
+    const fallback = user === 'alex' ? '/alex' : '/';
+    return <Navigate to={fallback} replace />;
+  }
   return children;
 }
 
